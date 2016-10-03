@@ -8,8 +8,9 @@ import MeteorImportsPlugin from 'meteor-imports-webpack-plugin'
 import buildDir from '../buildDir'
 
 const root = path.resolve(__dirname, '..')
-const srcDir = path.join(root, 'test')
-const clientInclude = [srcDir]
+const srcDir = path.join(root, 'src')
+const testDir = path.join(root, 'test')
+const clientInclude = [srcDir, testDir]
 
 const { ROOT_URL } = process.env
 

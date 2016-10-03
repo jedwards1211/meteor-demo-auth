@@ -65,9 +65,6 @@ exports.config = {
     // Enables colors for log output.
   coloredLogs: true,
     //
-    // Saves a screenshot to a given path if a command fails.
-  screenshotPath: './errorShots/',
-    //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
   baseUrl: process.env.ROOT_URL,

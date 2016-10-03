@@ -11,12 +11,7 @@ const root = path.resolve(__dirname, '..', '..')
 const build = path.join(root, 'build')
 
 /* global browser: false */
-
-function sharedTests() {
-  it('serves page with correct title', async function () {
-    expect(await browser.getTitle()).to.equal('meteor-demo-auth')
-  })
-}
+/* eslint-env browser */
 
 describe('dev mode', function () {
   let server
@@ -27,7 +22,7 @@ describe('dev mode', function () {
     server = exec('npm start')
     await Promise.all([
       stdouted(server, /webpack built [a-z0-9]+ in \d+ms/i),
-      stdouted(server, /App is listening on http/i),
+      stdouted(server, /LISTENING/),
     ])
     await browser.url(`http://localhost:${webpackConfig.devServer.port}`)
   })
@@ -37,5 +32,26 @@ describe('dev mode', function () {
     if (server) await kill(server)
   })
 
-  sharedTests()
+  it('demo login works', async function () {
+    await browser.executeAsync(done => window.Package.meteor.Meteor.startup(done))
+    await browser.executeAsync(done => window.loginForDemo(done))
+    const firstUserId = (await browser.executeAsync(done => done(window.Package.meteor.Meteor.userId()))).value
+    expect(firstUserId).to.be.defined
+
+    await browser.refresh()
+    await browser.executeAsync(done => window.Package.meteor.Meteor.startup(done))
+    await browser.executeAsync(done => window.loginForDemo(done))
+    const secondUserId = (await browser.executeAsync(done => done(window.Package.meteor.Meteor.userId()))).value
+    expect(secondUserId).to.equal(firstUserId)
+
+    await browser.executeAsync(done => {
+      localStorage.removeItem('demoLoginToken')
+      done()
+    })
+    await browser.refresh()
+    await browser.executeAsync(done => window.Package.meteor.Meteor.startup(done))
+    await browser.executeAsync(done => window.loginForDemo(done))
+    const thirdUserId = (await browser.executeAsync(done => done(window.Package.meteor.Meteor.userId()))).value
+    expect(thirdUserId).to.not.equal(firstUserId)
+  })
 })

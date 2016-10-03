@@ -3,6 +3,10 @@
 import express from 'express'
 import createSSR from './createSSR'
 import { WebApp } from 'meteor/webapp'
+import { Accounts } from 'meteor/accounts-base'
+import demoLoginHandler from '../../src/demoLoginHandler'
+
+Accounts.registerLoginHandler(demoLoginHandler)
 
 const app = express()
 
