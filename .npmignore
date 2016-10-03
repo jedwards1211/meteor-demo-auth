@@ -11,4 +11,5 @@ webpack
 .eslintrc
 .flowconfig
 .travis.yml
-*.js
+buildDir.js
+wdio.conf.js
