@@ -18,7 +18,7 @@
   "main": "index.js",
   "author": "Andy Edwards <jedwards@fastmail.com>",
   "license": "MIT",
-  "description": "Automatically logs user into a demo account with a localStorage token",
+  "description": "Automatically logs Meteor users into persistent demo accounts via localStorage tokens",
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",
     "babel-cli": "^6.14.0",
