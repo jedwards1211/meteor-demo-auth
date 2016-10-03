@@ -2,10 +2,29 @@ language: node_js
 node_js:
   - "4"
   - "5"
-  - "6.5"
+  - "6"
 sudo: required
 services:
   - mongodb
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
+      - libgnome-keyring-dev
+
+env:
+  - CXX=g++-4.8
+
+cache:
+  directories:
+    - node_modules
+
 before_install:
   - npm config set progress false
   - curl https://install.meteor.com/ | sh
+
+install:
+  - export CXX="g++-4.8"
+  - npm install
