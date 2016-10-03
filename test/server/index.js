@@ -1,11 +1,8 @@
 /* @flow */
 
 import express from 'express'
-import path from 'path'
 import createSSR from './createSSR'
 import { WebApp } from 'meteor/webapp'
-
-import '../universal/collections/Counts'
 
 const app = express()
 
@@ -16,10 +13,6 @@ app.use((req: Object, res: Object, next: Function) => {
     next()
   }
 })
-
-if (process.env.NODE_ENV === 'production') {
-  app.use('/static', express.static(path.resolve(__dirname, 'static')))
-}
 
 // server-side rendering
 app.get('*', (req: Object, res: Object, next: Function) => {

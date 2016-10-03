@@ -11,7 +11,7 @@ process.env.NODE_ENV = 'development'
 process.env.USE_DOTENV = '1'
 
 const root = path.resolve(__dirname, '..')
-const src = path.join(root, 'src')
+const src = path.join(root, 'test')
 
 async function start(options?: {commandOptions?: Array<any>} = {}): Promise<any> {
   if (process.argv.indexOf('--fast') < 0) {

@@ -1,4 +1,0 @@
-**
-!*.json
-!build
-build/**/bundle/programs/server/node_modules

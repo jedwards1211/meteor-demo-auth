@@ -5,12 +5,10 @@ import webpack from 'webpack'
 import HappyPack from 'happypack'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import MeteorImportsPlugin from 'meteor-imports-webpack-plugin'
-import cssModulesValues from 'postcss-modules-values'
 import buildDir from '../buildDir'
 
 const root = path.resolve(__dirname, '..')
-const srcDir = path.join(root, 'src')
-const globalCSS = path.join(srcDir, 'styles', 'global')
+const srcDir = path.join(root, 'test')
 const clientInclude = [srcDir]
 
 const { ROOT_URL } = process.env
@@ -19,8 +17,7 @@ const config = {
   context: root,
   devtool: 'eval',
   entry: [
-    './src/client/index.js',
-    'react-hot-loader/patch',
+    './test/client/index.js',
     'webpack-hot-middleware/client',
   ],
   output: {
@@ -53,27 +50,8 @@ const config = {
       injectMeteorRuntimeConfig: false,
     }),
   ],
-  postcss: [cssModulesValues],
   module: {
     loaders: [
-      { test: /\.json$/, loader: 'json-loader', exclude: [
-        path.join(root, 'node_modules', 'meteor-imports-webpack-plugin'),
-        path.join(root, 'build', 'meteor', 'bundle', 'programs'),
-      ]},
-      { test: /\.txt$/, loader: 'raw-loader' },
-      { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/, loader: 'url-loader?limit=10000' },
-      { test: /\.(eot|ttf|wav|mp3)$/, loader: 'file-loader' },
-      {
-        test: /\.css$/,
-        loader: 'style!css?modules&importLoaders=1&localIdentName=[name]_[local]_[hash:base64:5]!postcss',
-        exclude: globalCSS,
-        include: clientInclude,
-      },
-      {
-        test: /\.css$/,
-        loader: 'style!css',
-        include: globalCSS,
-      },
       {
         test: /\.js$/,
         loader: 'happypack/loader',
