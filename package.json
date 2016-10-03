@@ -9,7 +9,7 @@
     "lint": "eslint *.js src scripts test util webpack",
     "lint:fix": "eslint --fix *.js src scripts test util webpack",
     "build": "rimraf lib && babel src/ --out-dir lib",
-    "prepublish": "npm test && npm run build"
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "uuid": "^2.0.3"
