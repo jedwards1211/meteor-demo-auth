@@ -1,0 +1,14 @@
+.happypack
+build
+errorShots
+meteor
+node_modules
+scripts
+test
+webpack
+.babelrc
+.env
+.eslintrc
+.flowconfig
+.travis.yml
+*.js

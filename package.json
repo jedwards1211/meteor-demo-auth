@@ -7,7 +7,9 @@
     "test:dev": "babel-node scripts/test.js --mochaOpts.grep dev",
     "flow": "flow",
     "lint": "eslint *.js src scripts test util webpack",
-    "lint:fix": "eslint --fix *.js src scripts test util webpack"
+    "lint:fix": "eslint --fix *.js src scripts test util webpack",
+    "build": "rimraf lib && babel src/ --out-dir lib",
+    "prepublish": "npm test && npm run build"
   },
   "dependencies": {
     "uuid": "^2.0.3"
@@ -16,7 +18,7 @@
   "main": "index.js",
   "author": "Andy Edwards <jedwards@fastmail.com>",
   "license": "MIT",
-  "description": "Automatically logs user into a demo account with a token stored in their browser",
+  "description": "Automatically logs user into a demo account with a localStorage token",
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",
     "babel-cli": "^6.14.0",
