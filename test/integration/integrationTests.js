@@ -17,7 +17,7 @@ describe('dev mode', function () {
   let server
 
   before(async function () {
-    this.timeout(60000)
+    this.timeout(480000)
     await promisify(rimraf)(build)
     server = exec('npm start')
     await Promise.all([
@@ -33,6 +33,7 @@ describe('dev mode', function () {
   })
 
   it('demo login works', async function () {
+    this.timeout(60000)
     await browser.executeAsync(done => window.Package.meteor.Meteor.startup(done))
     await browser.executeAsync(done => window.loginForDemo(done))
     const firstUserId = (await browser.executeAsync(done => done(window.Package.meteor.Meteor.userId()))).value
